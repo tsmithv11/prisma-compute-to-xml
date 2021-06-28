@@ -33,7 +33,9 @@ function formatJUnitXML (results) {
       return '<testcase name="' + toSentenceCase(vuln.severity) + ' ' + vuln.id + ' found in ' + vuln.packageName 
                 + vuln.packageVersion + '" classname="' + vuln.packageName + vuln.packageVersion + 
                 '"><failure message="CVSS:' + vuln.cvss + '; ' + (vuln.status || 'not fixed') + ' | Published:' + 
-                vuln.publishedDate + '&#xA;Description:' + vuln.description + '"/></testcase>'
+                vuln.publishedDate + '&#xA;Description:' + 
+                vuln.description.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
+                '"/></testcase>'
     })
   }
 
@@ -42,7 +44,9 @@ function formatJUnitXML (results) {
   if (compliances) {
     comps = compliances.map(comp => {
       return '<testcase name="' + toSentenceCase(comp.severity) + ' severity compliance check ' + comp.title + 
-                ' violated" classname="' + comp.id + '"><failure message="' + comp.description + '"/></testcase>'
+                ' violated" classname="' + comp.id + '"><failure message="' + 
+                comp.description.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
+                '"/></testcase>'
     })
   }
 
@@ -51,5 +55,5 @@ function formatJUnitXML (results) {
           '" name="violations" tests="' + violations + '" time="' + violations + '">'
   tail = '</testsuite></testsuites>'
 
-  return [head, ...vulns, ...comps, tail].join("").toString().replace(/\'/gi,"&apos;")
+  return [head, ...vulns, ...comps, tail].join("").toString()
 }
