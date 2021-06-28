@@ -51,5 +51,5 @@ function formatJUnitXML (results) {
           '" name="violations" tests="' + violations + '" time="' + violations + '">'
   tail = '</testsuite></testsuites>'
 
-  return [head, ...vulns, ...comps, tail].join("").toString().replaceAll("\\\'","&apos;")
+  return [head, ...vulns, ...comps, tail].join("").toString().replace(/\'/gi,"&apos;")
 }
