@@ -31,9 +31,9 @@ function formatJUnitXML (results) {
     vulns = vulnerabilities.map(vuln => {
       vuln_count = vuln_count + 1
       return '<testcase name="' + toSentenceCase(vuln.severity) + ' ' + vuln.id + ' found in ' + vuln.packageName 
-                + vuln.packageVersion + '" classname="' + vuln.packageName + vuln.packageVersion + 
+                + ' ' + vuln.packageVersion + '" classname="' + vuln.packageName + ' ' + vuln.packageVersion + 
                 '"><failure message="CVSS:' + vuln.cvss + '; ' + (vuln.status || 'not fixed') + ' | Published:' + 
-                vuln.publishedDate + '&#xA;Description:' + 
+                vuln.publishedDate + '&#xA;Description: ' + 
                 vuln.description.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
                 '"/></testcase>'
     })
