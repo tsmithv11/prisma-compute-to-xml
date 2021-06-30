@@ -45,7 +45,7 @@ function formatJUnitXML (results) {
     comps = compliances.map(comp => {
       return '<testcase name="' + toSentenceCase(comp.severity) + ' severity compliance check ' + comp.title + 
                 ' violated" classname="' + comp.id + '"><failure message="' + 
-                comp.description.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
+                comp.title.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
                 '"/></testcase>'
     })
   }
