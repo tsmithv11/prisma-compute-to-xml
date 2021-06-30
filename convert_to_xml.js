@@ -34,7 +34,7 @@ function formatJUnitXML (results) {
                 + ' ' + vuln.packageVersion + '" classname="' + vuln.packageName + ' ' + vuln.packageVersion + 
                 '"><failure message="CVSS:' + vuln.cvss + '; ' + (vuln.status || 'not fixed') + ' | Published:' + 
                 vuln.publishedDate + '&#xA;Description: ' + 
-                vuln.description.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
+                vuln.description.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;").replace(/"/g,"&quot;") + 
                 '"/></testcase>'
     })
   }
@@ -45,7 +45,7 @@ function formatJUnitXML (results) {
     comps = compliances.map(comp => {
       return '<testcase name="' + toSentenceCase(comp.severity) + ' severity compliance check ' + comp.title + 
                 ' violated" classname="' + comp.id + '"><failure message="' + 
-                comp.title.replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;") + 
+                comp.title.replace(/&/g, "and").replace(/&/g, "and").replace(/\'/gi,"&apos;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;").replace(/"/g,"&quot;") + 
                 '"/></testcase>'
     })
   }
